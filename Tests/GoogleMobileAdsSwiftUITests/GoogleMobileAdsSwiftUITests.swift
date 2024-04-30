@@ -1,8 +1,9 @@
-import XCTest
 @testable import GoogleMobileAdsSwiftUI
+import XCTest
 
-final class GoogleMobileAdsSwiftUITests: XCTestCase {
-    func testExample() throws {
+internal final class GoogleMobileAdsSwiftUITests: XCTestCase {
+    // swiftlint:disable:next empty_xctest_method
+    internal func testExample() throws {
         // XCTest Documentation
         // https://developer.apple.com/documentation/xctest
 
