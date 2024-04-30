@@ -21,7 +21,6 @@ public class UIGoogleMobileAdsView: GADBannerView {
         self.frame = CGRect(origin: .zero, size: GADAdSizeBanner.size)
         self.backgroundColor = .clear
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.load(GADRequest())
     }
 
     override init(adSize: GADAdSize, origin: CGPoint) {
@@ -38,7 +37,7 @@ public class UIGoogleMobileAdsView: GADBannerView {
 public struct GoogleMobileAdsView: UIViewControllerRepresentable {
     private let adUnitID: String
 
-    public init(adUnitID: String) {
+    public init(adUnitID: String = "ca-app-pub-3940256099942544/2934735716") {
         #if DEBUG
             self.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         #else
@@ -49,15 +48,14 @@ public struct GoogleMobileAdsView: UIViewControllerRepresentable {
     public func makeCoordinator() {}
 
     public func makeUIViewController(context: Context) -> UIViewController {
-        let controller = UIViewController()
-        let bannerView = UIGoogleMobileAdsView()
+        let controller: UIViewController = .init()
+        let bannerView: UIGoogleMobileAdsView = .init()
         bannerView.adUnitID = self.adUnitID
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
         bannerView.rootViewController = UIApplication.shared.windows.first?.rootViewController
         bannerView.isHidden = false
+        bannerView.load(GADRequest())
         controller.view.addSubview(bannerView)
         controller.view.frame = CGRect(origin: .zero, size: GADAdSizeBanner.size)
-        bannerView.load(GADRequest())
         return controller
     }
 
